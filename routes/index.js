@@ -1,6 +1,7 @@
 //Required Modules
 const express = require('express');
 const tweetBank = require('../tweetBank');
+const timeSince = require('../public/utility/time');
 
 //Router
 module.exports = function(io){
@@ -8,14 +9,18 @@ module.exports = function(io){
 
   router.get('/', function (req, res) {
   let tweets = tweetBank.list();
+  tweets.forEach(function(tweet, i){
+    tweets[i].timeSinceString = timeSince.getTimeSince(tweet.date);
+    tweets[i].timeSince = tweet.date.getTime();
+  })
   res.render( 'index', { tweets: tweets, showForm: true} );
   });
 
   router.post('/tweets', function (req, res) {
     var name = req.body.name;
     var text = req.body.text;
-    var id = tweetBank.add(name, text);
-    io.sockets.emit('newTweet', {name, text, id});
+    var tweet = tweetBank.add(name, text);
+    io.sockets.emit('newTweet', tweet);
     res.redirect('/');
   });
 

@@ -64,3 +64,12 @@ code {
   margin-bottom: 50px;
   margin-top: 20px;
 }
+.tweetAgo {
+  margin-left: 20px;
+  color: #898d93;
+}
+.username a {
+  color: #e56f09;
+  font-weight: bold;
+  font-size: 18px;
+}
