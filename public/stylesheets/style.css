@@ -3,6 +3,9 @@ body {
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
 }
+li {
+  list-style-type: none;
+}
 
 /* Wrapper for page content to push down footer */
 #wrap {
@@ -56,4 +59,8 @@ code {
 }
 .content .by {
   font-weight: bold;
+}
+.tweet-form {
+  margin-bottom: 50px;
+  margin-top: 20px;
 }
