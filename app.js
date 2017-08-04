@@ -17,7 +17,7 @@ nunjucks.configure('views', {noCache: true});
 
 //Server Listening
 const server = app.listen(3000);
-const io = socketio.listen(server);
+io = socketio.listen(server);
 
 //body parser setup MUST GO BEFORE ROUTE SETUP
 app.use(bodyParser.urlencoded({extended: false}));
