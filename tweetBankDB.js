@@ -15,9 +15,9 @@ module.exports = {
     return client.query(`INSERT INTO tweets (user_id, content) VALUES ($1, $2) RETURNING id, user_id, content`, [userId, tweetContent]);
   },
 
-  sendTweet: function (result, io) {
+  sendTweet: function (userName, result, io) {
     console.log(result);
-    let tweet = { name: result.rows[0].user_id, content: result.rows[0].content };
+    let tweet = { name: userName, content: result.rows[0].content, id: result.rows[0].id};
     io.sockets.emit('newTweet', tweet);
   },
 
@@ -35,7 +35,7 @@ module.exports = {
         }
       })
       .then(function (result) {
-        module.exports.sendTweet(result, io);
+        module.exports.sendTweet(userName, result, io);
         callbackNext();
 
       })
